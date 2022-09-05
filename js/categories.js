@@ -5,6 +5,8 @@ let currentCategoriesArray = [];
 let currentSortCriteria = undefined;
 let minCount = undefined;
 let maxCount = undefined;
+let user = localStorage.getItem("email")
+
 
 function sortCategories(criteria, array){
     let result = [];
@@ -41,7 +43,6 @@ function setCatID(id) {
 }
 
 function showCategoriesList(){
-
     let htmlContentToAppend = "";
     for(let i = 0; i < currentCategoriesArray.length; i++){
         let category = currentCategoriesArray[i];
@@ -88,11 +89,12 @@ function sortAndShowCategories(sortCriteria, categoriesArray){
 //que el documento se encuentra cargado, es decir, se encuentran todos los
 //elementos HTML presentes.
 document.addEventListener("DOMContentLoaded", function(e){
+    if (!user){ window.location = "index.html"}
     getJSONData(CATEGORIES_URL).then(function(resultObj){
         if (resultObj.status === "ok"){
             currentCategoriesArray = resultObj.data
             showCategoriesList()
-            //sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
+           // sortAndShowCategories(ORDER_ASC_BY_NAME, resultObj.data);
         }
     });
 

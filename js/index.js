@@ -1,4 +1,7 @@
+let user = localStorage.getItem("email")
+
 document.addEventListener("DOMContentLoaded", function(){
+    if (!user){ window.location = "index.html"}
     document.getElementById("autos").addEventListener("click", function() {
         localStorage.setItem("catID", 101);
         window.location = "products.html"
@@ -11,4 +14,5 @@ document.addEventListener("DOMContentLoaded", function(){
         localStorage.setItem("catID", 103);
         window.location = "products.html"
     });
+
 });

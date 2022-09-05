@@ -12,8 +12,11 @@ document.getElementById("boton-ingreso").addEventListener("click", function(){
     }
     if (seCumple) {
         window.location = "portada.html"
+        window.localStorage.setItem("email", userEmail);
     }
 }); 
+
+
 
 
 

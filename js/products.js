@@ -41,9 +41,9 @@ function sortProducts(criteria, array){
     return result;
 }
 
-function setCatID(id) {
-    localStorage.setItem("catID", id);
-    window.location = "products.html"
+function setProdID(id) {
+    localStorage.setItem("prodID", id);
+    window.location = "product-info.html"
 }
 
 function showProductsList(){
@@ -55,7 +55,7 @@ function showProductsList(){
             ((maxCount == undefined) || (maxCount != undefined && parseInt(product.cost) <= maxCount))){
                 if ((product.name.toLowerCase().includes(search)) ||(product.description.toLowerCase().includes(search))|| (search == undefined)){
             htmlContentToAppend += `
-            <div class="list-group-item list-group-item-action cursor-active">
+            <div onclick="setProdID(${product.id})" class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col-3">
                         <img src="${product.image}" alt="${product.description}" class="img-thumbnail">

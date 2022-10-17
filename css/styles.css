@@ -211,3 +211,8 @@ a.custom-card:hover {
 .nav-user {
   color: white;
 }
+
+.imagen-carrito {
+  height: 3em;
+  width: auto;
+}

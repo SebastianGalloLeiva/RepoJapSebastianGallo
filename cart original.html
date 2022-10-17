@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <title>eMercado - Todo lo que busques está aquí</title>
+  <link href="https://fonts.googleapis.com/css?family=Raleway:300,300i,400,400i,700,700i,900,900i" rel="stylesheet">
+  <link href="css/bootstrap.min.css" rel="stylesheet">
+  <link href="css/font-awesome.min.css" rel="stylesheet">
+  <link href="css/styles.css" rel="stylesheet">
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark p-1">
+    <div class="container">
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
+        aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav w-100 justify-content-between">
+          <li class="nav-item">
+            <a class="nav-link" href="portada.html">Inicio</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="categories.html">Categorías</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="sell.html">Vender</a>
+          </li>
+          <li class="nav-item">
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <main>
+    <div class="container col-md-7 m-auto mt-5">
+      <h1 class="text-center">Carrito de compras</h1>
+      <h4 class="mb-5 "> <b>Articulos a comprar:</b></h2>
+        <div class="row align-items-start">
+          <div class="col">
+          </div>
+          <div class="col">
+            <p> <b>Nombre</b></p>
+          </div>
+          <div class="col">
+            <p> <b>Costo</b></p>
+          </div>
+          <div class="col">
+            <p> <b>Cantidad</b></p>
+          </div>
+          <div class="col">
+            <p> <b>Subtotal</b></p>
+          </div>
+        </div>
+        <hr class="border-2">
+        <div class="row align-items-start" id="cart">
+
+        </div>
+
+    <hr>
+    <hr>
+
+    <div class="row">
+      <div class="col-md-8 mb-4">
+
+        <div class=" mb-4">
+          <div class="m-3">
+            <h2>Tipo de envio</h2>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="envio" id="envio-premium" checked>
+              <label class="form-check-label" for="envio-premium">
+                Premium 2 a 5 dias (15%)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="envio" id="envio-express">
+              <label class="form-check-label" for="envio-express">
+                Express 5 a 8 dias (7%)
+              </label>
+            </div>
+            <div class="form-check">
+              <input class="form-check-input" type="radio" name="envio" id="envio-standard">
+              <label class="form-check-label" for="envio-standard">
+                Standard 12 a 15 dias (5%)
+              </label>
+            </div>
+          </div>
+          <div class=" py-3">
+            <h5 class="mb-0">Direccion de envio</h5>
+          </div>
+          <div class="">
+            <form>
+              <div class="row mb-4">
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="form7Example1">Calle</label>
+                    <input type="text" id="form7Example1" class="form-control" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline">
+                    <label class="form-label" for="form7Example2">Numero</label>
+                    <input type="text" id="form7Example2" class="form-control" />
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col">
+                  <div class="form-outline mb-4">
+                    <label class="form-label" for="form7Example3">Esquina</label>
+                    <input type="text" id="form7Example3" class="form-control" />
+                  </div>
+                </div>
+                <div class="col">
+                  <div class="form-outline mb-4">
+                  </div>
+                </div>
+              </div>
+
+            </form>
+          </div>
+        </div>
+      </div>
+</div>
+
+    </div>
+  </main>
+  <footer class="text-muted">
+    <div class="container">
+      <p class="float-end">
+        <a href="#">Volver arriba</a>
+      </p>
+      <p>Este sitio forma parte de <a href="https://jovenesaprogramar.edu.uy/" target="_blank">Jovenes a Programar</a> -
+        2022</p>
+      <p>Clickea <a target="_blank" href="Letra.pdf">aquí</a> para descargar la letra del obligatorio.</p>
+    </div>
+  </footer>
+  <div id="spinner-wrapper">
+    <div class="lds-ring">
+      <div></div>
+      <div></div>
+      <div></div>
+      <div></div>
+    </div>
+  </div>
+  <script src="js/bootstrap.bundle.min.js"></script>
+  <script src="js/init.js"></script>
+  <script src="js/cart.js"></script>
+  <script src="js/showuser.js"></script>
+</body>
+
+</html>
+
+
+
+
+<!-- <div class="col">
+            <img class="imagen-carrito" src="img/prod50924_1.jpg">
+          </div>
+          <div class="col">
+            Peugeot 309
+          </div>
+          <div class="col">
+            USD 50000
+          </div>
+          <div class="col">
+            <div class="form-outline">
+              <input type="number" id="typeNumber" class="form-control" placeholder="1" />
+               <label class="form-label" for="typeNumber">Number input</label> -->

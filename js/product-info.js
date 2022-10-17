@@ -1,37 +1,101 @@
 let product = "";
 let id = localStorage.getItem("prodID");
 let jsonProducto = localStorage.getItem("catID");
-let currentCategory = ""
-let currentProductComments = ""
+let currentCategory = "";
+let currentProductComments = "";
 let comentario = undefined;
 let userScore = undefined;
-let user = localStorage.getItem("email")
+let user = localStorage.getItem("email");
 let comentarioNro = 1;
-let usercomment = ""
-let comentariosdelapeople = []
-
+let usercomment = "";
+let comentariosdelapeople = [];
+let userCart = "";
+let newCart = [];
 
 function setProdID(id) {
-    localStorage.setItem("prodID", id);
-    window.location = "product-info.html"
+  localStorage.setItem("prodID", id);
+  window.location = "product-info.html";
 }
+// function setCart() {
+//   let cuantiti = 1;
 
-function showProduct(){
-    let htmlContentToAppend= "";
-    let images = product.images
-    let image = ""
-    image = `<div class="carousel-item active">
+//   if (localStorage.getItem(`cart_${user}`)) {
+//     newCart = JSON.parse(localStorage.getItem(`cart_${user}`));
+//     //  console.log(newCart[0].productId);
+//     // console.log(newCart)
+//     alert(newCart.length);
+//     alert("jola");
+//     for (let i = 0; i < newCart.length; i++) {
+//       let carters = newCart[i];
+//       console.log(carters);
+//       alert(carters.productId.includes(id))
+
+//       if (carters.productId.includes(id)) {
+//         cuantiti = carters.count + 1;
+//         carters.count = cuantiti;
+//       } else {
+//         userCart = {
+//           productId: id,
+//           name: product.name,
+//           cost: product.cost,
+//           moneda: product.currency,
+//           imagen: product.images[0],
+//           count: cuantiti,
+//         };
+//         newCart.push(userCart)
+//       }
+//     }
+//   } else if (newCart.length == 0) {
+//       alert('por aca no es!')
+//    // console.log(newCart);
+//     userCart = {
+//       productId: id,
+//       name: product.name,
+//       cost: product.cost,
+//       moneda: product.currency,
+//       imagen: product.images[0],
+//       count: cuantiti,
+//     };
+//     alert("hola");
+//     alert(userCart.name);
+//     newCart.push(userCart);
+//   }
+  
+//   console.log(newCart)
+// //   debugger
+//   alert('chequear console')
+
+//   localStorage.setItem(`cart_${user}`, JSON.stringify(newCart));
+
+//   window.location = "cart.html";
+// }
+
+function showProduct() {
+  let htmlContentToAppend = "";
+  let images = product.images;
+  let image = "";
+  image = `<div class="carousel-item active">
     <img src="${product.images[0]}" class="d-block w-100">
   </div>`;
-    images.shift()
-    for (let i in images) {
-        image += `<div class="carousel-item">
+  images.shift();
+  for (let i in images) {
+    image += `<div class="carousel-item">
         <img src="${images[i]}" class="d-block w-100">
-      </div>`
-    }
-       
-    htmlContentToAppend += `
-         <h1> ${product.name} </h1>
+      </div>`;
+  }
+
+  htmlContentToAppend += `
+        <div class="row">
+        <div class="col">
+
+         <h1> ${product.name} </h1> 
+         </div>
+         <div align="right" class="col">
+
+         <button type="button" class="btn btn-success" onclick="setCart()">Comprar</button>
+         </div>
+         </div>
+
          <hr>
          <h2> Precio </h2>
          <p2> ${product.currency} ${product.cost}  </p2>
@@ -50,34 +114,36 @@ function showProduct(){
     
   </div>
 </div>
-         `
-         document.getElementById("info-producto").innerHTML = htmlContentToAppend;
-         contenidoParaAgregar = `
+         `;
+  document.getElementById("info-producto").innerHTML = htmlContentToAppend;
+  contenidoParaAgregar = `
          ${image}
-         `
-         document.getElementById("imagenes-carousel").innerHTML += contenidoParaAgregar
+         `;
+  document.getElementById("imagenes-carousel").innerHTML +=
+    contenidoParaAgregar;
 }
 
-function showComments(){
-    let htmlContentToAppend ="";
-    let comments = currentProductComments;
-    let rating = ""
-    if ((comments.length == 0 ) && (!localStorage.getItem(`commentario${id}`))){ htmlContentToAppend = ` <p>No hay comentarios, sé el primero en comentar! </p>`
+function showComments() {
+  let htmlContentToAppend = "";
+  let comments = currentProductComments;
+  let rating = "";
+  if (comments.length == 0 && !localStorage.getItem(`commentario${id}`)) {
+    htmlContentToAppend = ` <p>No hay comentarios, sé el primero en comentar! </p>`;
     // console.log((localStorage.getItem(`commentario${id}`)))
     document.getElementById("user-comment").innerHTML = htmlContentToAppend;
-};
+  }
 
-    for (let i = 0; i < comments.length; i++) {
-        let comment = comments[i];
-        let scores = comment.score;
-    for (let i = 0; i < scores+1; i++) {
-        rating += `<span class="fa fa-star checked"></span>`
-        } 
-    for (let i = scores; i<5; i++) {
-        rating += `<span class="fa fa-star "></span>`
-    }   
+  for (let i = 0; i < comments.length; i++) {
+    let comment = comments[i];
+    let scores = comment.score;
+    for (let i = 0; i < scores + 1; i++) {
+      rating += `<span class="fa fa-star checked"></span>`;
+    }
+    for (let i = scores; i < 5; i++) {
+      rating += `<span class="fa fa-star "></span>`;
+    }
 
-        htmlContentToAppend +=`
+    htmlContentToAppend += `
         <div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                 
@@ -91,27 +157,28 @@ function showComments(){
                     </div>
                 </div>
             </div>
-        `
-        document.getElementById("user-comment").innerHTML = htmlContentToAppend;
-        rating = "";
-}};
+        `;
+    document.getElementById("user-comment").innerHTML = htmlContentToAppend;
+    rating = "";
+  }
+}
 
-function showNewComments(){
-    let htmlContentToAppend = "";
-    let newrating = "";
-    // htmlContentToAppend = JSON.parse(localStorage.getItem(`commentario${id}`))
-    let newcomments = JSON.parse(localStorage.getItem(`commentario${id}`))
-    for (let i = 0; i < newcomments.length; i++) {
-        let newcomment = newcomments[i];        
-        let scores = newcomment.score;
+function showNewComments() {
+  let htmlContentToAppend = "";
+  let newrating = "";
+  // htmlContentToAppend = JSON.parse(localStorage.getItem(`commentario${id}`))
+  let newcomments = JSON.parse(localStorage.getItem(`commentario${id}`));
+  for (let i = 0; i < newcomments.length; i++) {
+    let newcomment = newcomments[i];
+    let scores = newcomment.score;
     for (let i = 0; i <= scores; i++) {
-        newrating += `<span class="fa fa-star checked"></span>`
-        } 
-    for (let i = scores; i<5; i++) {
-        newrating += `<span class="fa fa-star "></span>`
-    }   
+      newrating += `<span class="fa fa-star checked"></span>`;
+    }
+    for (let i = scores; i < 5; i++) {
+      newrating += `<span class="fa fa-star "></span>`;
+    }
 
-        htmlContentToAppend =`
+    htmlContentToAppend = `
         <div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
                 
@@ -125,97 +192,152 @@ function showNewComments(){
                     </div>
                 </div>
             </div>
-        `
+        `;
     document.getElementById("user-comment").innerHTML += htmlContentToAppend;
     newrating = "";
-}};
+  }
+}
 
-function saveComment(comentarioUsuario, puntaje){
-    if (localStorage.getItem(`commentario${id}`)){
-    comentariosdelapeople = JSON.parse(localStorage.getItem(`commentario${id}`))}
-    // let commentario = comentarioUsuario;
-    // let score = puntaje;
-    let now = new Date();
-    let ano = now.getFullYear();
-    let mes = ("0" + (now.getMonth()+1)).slice(-2);
-    let dia = ("0" + now.getDate()).slice(-2);
-    let horas = ("0" + now.getHours()).slice(-2);
-    let minutos = ("0" + now.getMinutes()).slice(-2);
-    let segundos = ("0" + now.getSeconds()).slice(-2);
-    let dateTime = `${ano}-${mes}-${dia} `;
-        dateTime += `${horas}:${minutos}:${segundos}`;
-        usercomment = { User: user,
-                        score: userScore,
-                        commentario: comentario,
-                        productoid: id,
-                        fecha: dateTime,           
-        }
-        
-        comentariosdelapeople.push(usercomment)
+function saveComment(comentarioUsuario, puntaje) {
+  if (localStorage.getItem(`commentario${id}`)) {
+    comentariosdelapeople = JSON.parse(
+      localStorage.getItem(`commentario${id}`)
+    );
+  }
+  // let commentario = comentarioUsuario;
+  // let score = puntaje;
+  let now = new Date();
+  let ano = now.getFullYear();
+  let mes = ("0" + (now.getMonth() + 1)).slice(-2);
+  let dia = ("0" + now.getDate()).slice(-2);
+  let horas = ("0" + now.getHours()).slice(-2);
+  let minutos = ("0" + now.getMinutes()).slice(-2);
+  let segundos = ("0" + now.getSeconds()).slice(-2);
+  let dateTime = `${ano}-${mes}-${dia} `;
+  dateTime += `${horas}:${minutos}:${segundos}`;
+  usercomment = {
+    User: user,
+    score: userScore,
+    commentario: comentario,
+    productoid: id,
+    fecha: dateTime,
+  };
 
-    localStorage.setItem(`commentario${id}`, JSON.stringify(comentariosdelapeople))
-   }
+  console.log(comentariosdelapeople);
+  console.log(usercomment);
 
-function showRelatedProducts(){
-    let htmlContentToAppend= "";
-    for (let i = 0; i < relatedProducts.length; i++) {
-        let relatedProduct = relatedProducts[i];
-    
+  comentariosdelapeople.push(usercomment);
+
+  localStorage.setItem(
+    `commentario${id}`,
+    JSON.stringify(comentariosdelapeople)
+  );
+}
+
+function showRelatedProducts() {
+  let htmlContentToAppend = "";
+  for (let i = 0; i < relatedProducts.length; i++) {
+    let relatedProduct = relatedProducts[i];
+
     htmlContentToAppend += `
     <div onclick="setProdID(${relatedProduct.id})" class="w-25 col-sm list-group-item list-group-item-action cursor-active">
     
     <img src="${relatedProduct.image}" class="img-fluid"></img>
             ${relatedProduct.name}
             </div>
-         `
-         document.getElementById("related-products").innerHTML = htmlContentToAppend;
-}}
+         `;
+    document.getElementById("related-products").innerHTML = htmlContentToAppend;
+  }
+}
 
-
-document.addEventListener("DOMContentLoaded", function(e){
-    getJSONData(PRODUCT_INFO_URL + id + ".json").then(function(resultObj){
-        if (resultObj.status === "ok"){
-            product = resultObj.data
-            relatedProducts = product.relatedProducts
-            showProduct();
-            showRelatedProducts()            
-        }
-    })
-    
-});
-
-document.addEventListener("DOMContentLoaded", function(e){
-    if (!user){ window.location = "index.html"};
-    getJSONData(PRODUCT_INFO_COMMENTS_URL + id + ".json").then(function(resultComm){
-        if (resultComm.status === "ok"){
-            currentProductComments = resultComm.data
-            showComments(currentProductComments);
-        }
-    })
-});
-
-document.getElementById("enviar-comentario").addEventListener("click", function(){
-        comentario = document.getElementById("user-made-comment").value;
-        userScore = document.getElementById("user-rating").value;
-        console.log(userScore)
-        let seCumple = true;
-    if (comentario =="") {
-        seCumple = false;
-        alert("Ingresar comentario por favor.");
+document.addEventListener("DOMContentLoaded", function (e) {
+  getJSONData(PRODUCT_INFO_URL + id + ".json").then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      product = resultObj.data;
+      relatedProducts = product.relatedProducts;
+      showProduct();
+      showRelatedProducts();
     }
-    if (userScore =="Tu puntuacion"){
-        seCumple = false;
-        alert("Ingresar puntuacion.");
+  });
+});
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  if (!user) {
+    window.location = "index.html";
+  }
+  getJSONData(PRODUCT_INFO_COMMENTS_URL + id + ".json").then(function (
+    resultComm
+  ) {
+    if (resultComm.status === "ok") {
+      currentProductComments = resultComm.data;
+      showComments(currentProductComments);
+    }
+  });
+});
+
+document
+  .getElementById("enviar-comentario")
+  .addEventListener("click", function () {
+    comentario = document.getElementById("user-made-comment").value;
+    userScore = document.getElementById("user-rating").value;
+    console.log(userScore);
+    let seCumple = true;
+    if (comentario == "") {
+      seCumple = false;
+      alert("Ingresar comentario por favor.");
+    }
+    if (userScore == "Tu puntuacion") {
+      seCumple = false;
+      alert("Ingresar puntuacion.");
     }
     if (seCumple) {
-        saveComment(comentario, userScore);
-        }
-})
-
-document.addEventListener("DOMContentLoaded", function(e){
-    if (localStorage.getItem(`commentario${id}`)){
-        getJSONData(PRODUCT_INFO_URL + id + ".json").then(function(resultObj){
-            if (resultObj.status === "ok"){
-        showNewComments();
+      saveComment(comentario, userScore);
     }
-})}});
+  });
+
+document.addEventListener("DOMContentLoaded", function (e) {
+  if (localStorage.getItem(`commentario${id}`)) {
+    getJSONData(PRODUCT_INFO_URL + id + ".json").then(function (resultObj) {
+      if (resultObj.status === "ok") {
+        showNewComments();
+      }
+    });
+  }
+});
+
+// function setCart() {
+//     let cuantiti = 0
+//     let bandera = false
+//     if (localStorage.getItem(`cart_${user}`)){
+//           newCart = JSON.parse(localStorage.getItem(`cart_${user}`));
+//          // console.log(newCart[0].productId);
+//         //console.log(newCart)
+//         bandera = true
+//         }
+
+//     if (bandera) { (newCart[0].productId.includes(id))
+//         cuantiti = newCart[0].count + 1
+//         newCart[0].count = cuantiti
+//     }
+//     if (!bandera) {
+
+//   userCart = {
+//     productId: id,
+//     name: product.name,
+//     cost: product.cost,
+//     moneda: product.currency,
+//     imagen: product.images[0],
+//     count : cuantiti,
+//   }
+
+//   //console.log(newCart)
+//   //console.log(userCart)
+
+//   newCart.push(userCart) }
+//   localStorage.setItem(
+//     `cart_${user}`,
+//     JSON.stringify(newCart)
+//   );
+
+//   window.location = "cart.html";
+// }

@@ -10,65 +10,61 @@ let comentarioNro = 1;
 let usercomment = "";
 let comentariosdelapeople = [];
 let userCart = "";
-let newCart = [];
+
 
 function setProdID(id) {
   localStorage.setItem("prodID", id);
   window.location = "product-info.html";
 }
-// function setCart() {
-//   let cuantiti = 1;
-
-//   if (localStorage.getItem(`cart_${user}`)) {
-//     newCart = JSON.parse(localStorage.getItem(`cart_${user}`));
-//     //  console.log(newCart[0].productId);
-//     // console.log(newCart)
-//     alert(newCart.length);
-//     alert("jola");
-//     for (let i = 0; i < newCart.length; i++) {
-//       let carters = newCart[i];
-//       console.log(carters);
-//       alert(carters.productId.includes(id))
-
-//       if (carters.productId.includes(id)) {
-//         cuantiti = carters.count + 1;
-//         carters.count = cuantiti;
-//       } else {
-//         userCart = {
-//           productId: id,
-//           name: product.name,
-//           cost: product.cost,
-//           moneda: product.currency,
-//           imagen: product.images[0],
-//           count: cuantiti,
-//         };
-//         newCart.push(userCart)
-//       }
-//     }
-//   } else if (newCart.length == 0) {
-//       alert('por aca no es!')
-//    // console.log(newCart);
-//     userCart = {
-//       productId: id,
-//       name: product.name,
-//       cost: product.cost,
-//       moneda: product.currency,
-//       imagen: product.images[0],
-//       count: cuantiti,
-//     };
-//     alert("hola");
-//     alert(userCart.name);
-//     newCart.push(userCart);
-//   }
+function setCart() {
+  userCart = {
+    productId: id,
+    name: product.name,
+    cost: product.cost,
+    moneda: product.currency,
+    imagen: product.images[0],
+    count: 1,
+  };
   
-//   console.log(newCart)
-// //   debugger
-//   alert('chequear console')
+  try {
+    newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
+    if (newCart['producto' + id]){
 
-//   localStorage.setItem(`cart_${user}`, JSON.stringify(newCart));
+      let cantidades = parseInt( newCart['producto' + id].count) + 1
+     
+      newCart['producto'+id].count = cantidades
 
-//   window.location = "cart.html";
-// }
+      localStorage.setItem(`cart_${user}`, JSON.stringify(newCart))
+      
+
+
+
+
+    }
+    else {
+  newCart['producto' + id] = userCart
+  newCart['producto' + id].count = 1
+  
+  
+
+  localStorage.setItem(`cart_${user}`, JSON.stringify(newCart))
+    }
+    
+  } catch (error) {
+    const newCart = new Object();
+    
+  newCart['producto' + id] = userCart
+
+
+  localStorage.setItem(`cart_${user}`, JSON.stringify(newCart))
+
+    
+  }
+  ;
+
+  window.location = "cart.html";
+}
+
 
 function showProduct() {
   let htmlContentToAppend = "";
@@ -129,7 +125,6 @@ function showComments() {
   let rating = "";
   if (comments.length == 0 && !localStorage.getItem(`commentario${id}`)) {
     htmlContentToAppend = ` <p>No hay comentarios, sé el primero en comentar! </p>`;
-    // console.log((localStorage.getItem(`commentario${id}`)))
     document.getElementById("user-comment").innerHTML = htmlContentToAppend;
   }
 
@@ -146,7 +141,6 @@ function showComments() {
     htmlContentToAppend += `
         <div class="list-group-item list-group-item-action cursor-active">
                 <div class="row">
-                
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1"><strong>${comment.user}</strong></h4>
@@ -166,7 +160,6 @@ function showComments() {
 function showNewComments() {
   let htmlContentToAppend = "";
   let newrating = "";
-  // htmlContentToAppend = JSON.parse(localStorage.getItem(`commentario${id}`))
   let newcomments = JSON.parse(localStorage.getItem(`commentario${id}`));
   for (let i = 0; i < newcomments.length; i++) {
     let newcomment = newcomments[i];
@@ -204,8 +197,6 @@ function saveComment(comentarioUsuario, puntaje) {
       localStorage.getItem(`commentario${id}`)
     );
   }
-  // let commentario = comentarioUsuario;
-  // let score = puntaje;
   let now = new Date();
   let ano = now.getFullYear();
   let mes = ("0" + (now.getMonth() + 1)).slice(-2);
@@ -223,8 +214,7 @@ function saveComment(comentarioUsuario, puntaje) {
     fecha: dateTime,
   };
 
-  console.log(comentariosdelapeople);
-  console.log(usercomment);
+ 
 
   comentariosdelapeople.push(usercomment);
 
@@ -280,7 +270,6 @@ document
   .addEventListener("click", function () {
     comentario = document.getElementById("user-made-comment").value;
     userScore = document.getElementById("user-rating").value;
-    console.log(userScore);
     let seCumple = true;
     if (comentario == "") {
       seCumple = false;
@@ -305,39 +294,3 @@ document.addEventListener("DOMContentLoaded", function (e) {
   }
 });
 
-// function setCart() {
-//     let cuantiti = 0
-//     let bandera = false
-//     if (localStorage.getItem(`cart_${user}`)){
-//           newCart = JSON.parse(localStorage.getItem(`cart_${user}`));
-//          // console.log(newCart[0].productId);
-//         //console.log(newCart)
-//         bandera = true
-//         }
-
-//     if (bandera) { (newCart[0].productId.includes(id))
-//         cuantiti = newCart[0].count + 1
-//         newCart[0].count = cuantiti
-//     }
-//     if (!bandera) {
-
-//   userCart = {
-//     productId: id,
-//     name: product.name,
-//     cost: product.cost,
-//     moneda: product.currency,
-//     imagen: product.images[0],
-//     count : cuantiti,
-//   }
-
-//   //console.log(newCart)
-//   //console.log(userCart)
-
-//   newCart.push(userCart) }
-//   localStorage.setItem(
-//     `cart_${user}`,
-//     JSON.stringify(newCart)
-//   );
-
-//   window.location = "cart.html";
-// }

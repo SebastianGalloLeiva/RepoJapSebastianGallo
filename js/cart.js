@@ -1,258 +1,256 @@
 let user = localStorage.getItem("email");
+let id = localStorage.getItem("prodID");
+const envioPremium = 0.15
+const envioExpress = 0.07
+const envioStandard = 0.05
+let subtotalDol = 0
+let subtotalUyu = 0
+let subtotalTotal = 0
+let costoEnvio = 0
+let porcentaje = 5
+let total = 0
+let envio = 0
+let cantidad = 1
 
-let cantidad = localStorage.getItem("cantidad");
 
-function showCurrentCart() {
-    if (user != 25801 || cantidad == 0) {
-        let htmlContentToAppend = `
-        <div class="alert alert-danger" role="alert">
-  <h4 class="alert-heading">No hay nada en el carrito</h4>
-        </div>
-        `;
+function setProdID(id) {
+  localStorage.setItem("prodID", id);
+  let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
+  newCart['producto' + id].count = cantidad
+  localStorage.setItem(`cart_${user}`, JSON.stringify(newCart))
+  showCurrentCart()
 
-        document.getElementById("cart").innerHTML = htmlContentToAppend;
-    } else {
-        let htmlContentToAppend = "";
-        let currentCartToShow = currentCart;
-        let subtotal = currentCartToShow.unitCost * cantidad;
-        
-        htmlContentToAppend = `
-        <div class="container col-md-7 m-auto mt-5">
-        <h1 class="text-center">Carrito de compras</h1>
-        <h4 class="mb-5 "> <b>Articulos a comprar:</b></h2>
-          <div class="row align-items-start">
-            <div class="col">
-            </div>
-            <div class="col">
-              <p> <b>Nombre</b></p>
-            </div>
-            <div class="col">
-              <p> <b>Costo</b></p>
-            </div>
-            <div class="col">
-              <p> <b>Cantidad</b></p>
-            </div>
-            <div class="col">
-              <p> <b>Subtotal</b></p>
-            </div>
-          </div>
-          <hr class="border-2">
-          <div class="row align-items-start">
-          <div class="col">
-          <img src="${currentCartToShow.image}" class="imagen-carrito">
-        </div>
-        <div class="col">
-          ${currentCartToShow.name}
-        </div>
-        <div class="col">
-         ${currentCartToShow.currency} ${currentCartToShow.unitCost}
-        </div>
-        <div class="col">
-          <div class="form-outline col-5">
-            <input type="number" id="typeNumber" class="form-control" value="${cantidad}" />
-          </div>
-        </div>
-        <div class="col">
-
-        <b>${currentCartToShow.currency} ${subtotal}</b>
-        </div>
-          </div>
-  
-      <hr>
-      <hr>
-  
-      <div class="row">
-        <div class="col-md-8 mb-4">
-  
-          <div class=" mb-4">
-            <div class="m-3">
-              <h2>Tipo de envio</h2>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="envio" id="envio-premium" checked>
-                <label class="form-check-label" for="envio-premium">
-                  Premium 2 a 5 dias (15%)
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="envio" id="envio-express">
-                <label class="form-check-label" for="envio-express">
-                  Express 5 a 8 dias (7%)
-                </label>
-              </div>
-              <div class="form-check">
-                <input class="form-check-input" type="radio" name="envio" id="envio-standard">
-                <label class="form-check-label" for="envio-standard">
-                  Standard 12 a 15 dias (5%)
-                </label>
-              </div>
-            </div>
-            <div class=" py-3">
-              <h5 class="mb-0">Direccion de envio</h5>
-            </div>
-            <div class="">
-              <form>
-                <div class="row mb-4">
-                  <div class="col">
-                    <div class="form-outline">
-                      <label class="form-label" for="form7Example1">Calle</label>
-                      <input type="text" id="form7Example1" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col">
-                    <div class="form-outline">
-                      <label class="form-label" for="form7Example2">Numero</label>
-                      <input type="text" id="form7Example2" class="form-control" />
-                    </div>
-                  </div>
-                </div>
-                <div class="row">
-                  <div class="col">
-                    <div class="form-outline mb-4">
-                      <label class="form-label" for="form7Example3">Esquina</label>
-                      <input type="text" id="form7Example3" class="form-control" />
-                    </div>
-                  </div>
-                  <div class="col">
-                    
-                    </div>
-                    <div class="form-outline mb-4">
-                    <button type="button" class="btn btn-success" >Checkout</button>
-                  </div>
-                </div>
-  
-              </form>
-            </div>
-          </div>
-        </div>
-  </div>
-  
-      </div>
-        `;
-
-        document.getElementById("cart").innerHTML = htmlContentToAppend;
-    }
+  window.location = "cart.html"
 }
 
-document.addEventListener("DOMContentLoaded", function (e) {
-    if (!user) {
-        window.location = "index.html";
+
+function showCurrentCart() {
+
+  let htmlContentToAppend = "";
+  let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
+  htmlContentToAppend += `
+        <div class="container col-md-7 m-auto mt-5">
+       <h1 class="text-center">Carrito de compras</h1>
+       <h4 class="mb-5 "> <b>Articulos a comprar:</b></h2>
+         <div class="row align-items-start">
+           <div class="col">
+           </div>
+           <div class="col">
+             <p> <b>Nombre</b></p>
+           </div>
+           <div class="col">
+             <p> <b>Costo</b></p>
+           </div>
+           <div class="col">
+             <p> <b>Cantidad</b></p>
+           </div>
+           <div class="col">
+             <p> <b>Subtotal</b></p>
+           </div>
+         </div>
+         <hr class="border-2">
+         `
+
+  for (const i in newCart) {
+    const cart = newCart[i];
+    subtotal = (cart.count * cart.cost)
+    if (cart.moneda == "USD") {
+      subtotalDol += subtotal
+
     }
-    getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            currentCart = resultObj.data.articles[0];
-            showCurrentCart();
-        }
-    });
-});
+    if (cart.moneda == "UYU") {
+      subtotalUyu += subtotal
+
+    }
+    subtotalTotal = subtotalDol + subtotalUyu / 40
+   
+    if (cart.name != undefined && cart.count>0) {
+      htmlContentToAppend += `
+         <div class="row mb-3 align-items-start">
+        <div class="col">
+            <img src="${cart.imagen}" class="imagen-carrito">
+          </div>
+          <div class="col">
+            ${cart.name}
+          </div>
+          <div class="col">
+           ${cart.moneda} ${cart.cost}
+          </div>
+          <div class="col">
+            <div class="form-outline col-5" onclick="setProdID(${cart.productId})">
+              <input type="number" id="typeNumber" class="form-control type-number" value="${cart.count}" />
+            </div>
+          </div>
+          <div class="col">
+
+          <b>${cart.moneda} ${subtotal} </b>
+          </div>
+          </div>
+          <hr>
+          `;
+
+    }
+  }
+  document.getElementById("cart").innerHTML = htmlContentToAppend
+
+
+  htmlContentToAppend = `
+        <div class="container">
+        <h3> Costos </h3>
+        <div class="list-group-item ">
+                <div class="row">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">Subtotal</h4>                        
+                        <p class="mb-1">USD ${subtotalTotal}</p>
+                    </div>
+                </div>
+                <div class="row">
+                <p>Costo unitario del producto por cantidad</p>
+            </div>
+            </div>
+            <div class="list-group-item ">
+                <div class="row">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">Costo de envio</h4>                        
+                        <p class="mb-1">USD ${Math.ceil(subtotalTotal * envioPremium)}</p>
+                    </div>
+                </div>
+                <div class="row">
+                <p>Segun el tipo de envio</p>
+            </div>
+            </div>
+            <div class="list-group-item ">
+                <div class="row">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">Total($)</h4>                        
+                        <p class="mb-1"><strong>USD ${subtotalTotal + Math.ceil(subtotalTotal * envioPremium)}</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                <p>Costo unitario del producto por cantidad</p>
+            </div>
+            </div>
+
+            </div>`
+
+
+
+
+
+  document.getElementById("envio").innerHTML = htmlContentToAppend;
+}
+
+function cantidadProductoCarrito() {
+  let numbers = document.getElementsByClassName("type-number")
+  for (let i = 0; i < numbers.length; i++) {
+    numbers[i].addEventListener('change', function () {
+      cantidad = numbers[i].value
+    })
+  }
+};
+
+function showCostoEnvio() {
+  htmlContentToAppend = `
+  <div class="container">
+        <h3> Costos </h3>
+        <div class="list-group-item ">
+                <div class="row">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">Subtotal</h4>                        
+                        <p class="mb-1">USD ${subtotalTotal}</p>
+                    </div>
+                </div>
+                <div class="row">
+                <p>Costo unitario del producto por cantidad</p>
+            </div>
+            </div>
+            <div class="list-group-item ">
+                <div class="row">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">Costo de envio</h4>                        
+                        <p class="mb-1">USD ${envio}</p>
+                    </div>
+                </div>
+                <div class="row">
+                <p>Segun el tipo de envio</p>
+            </div>
+            </div>
+            <div class="list-group-item ">
+                <div class="row">
+                        <div class="d-flex w-100 justify-content-between">
+                            <h4 class="mb-1">Total($)</h4>                        
+                        <p class="mb-1"><strong>USD ${subtotalTotal + envio}</strong></p>
+                    </div>
+                </div>
+                <div class="row">
+                <p>Costo unitario del producto por cantidad</p>
+            </div>
+            </div>
+
+            </div>
+        `
+
+
+
+  document.getElementById("envio").innerHTML = htmlContentToAppend;
+
+}
+function tipoDeEnvio(tipo) {
+  if (tipo === envioPremium) {
+    document.getElementById("envio-premium").setAttribute('checked', '')
+    envio = Math.ceil(subtotalTotal * envioPremium)
+  }
+  if (tipo === envioExpress) {
+    document.getElementById("envio-express").setAttribute('checked', '')
+    envio = Math.ceil(subtotalTotal * envioExpress)
+  }
+  if (tipo === envioStandard) {
+    document.getElementById("envio-standard").setAttribute('checked', '')
+    envio = Math.ceil(subtotalTotal * envioStandard)
+
+  }
+  showCostoEnvio()
+
+};
+
 
 document.addEventListener("DOMContentLoaded", function (e) {
-    
-    getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
-        if (resultObj.status === "ok") {
-            document
-                .getElementById("typeNumber")
-                .addEventListener("change", function () {
-                    cantidad = localStorage.setItem(
-                        "cantidad",
-                        document.getElementById("typeNumber").value
-                    );
-                    location.reload();
-                });
-        }
-    });
+  if (!user) {
+    window.location = "index.html";
+  }
+  getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
+    if (resultObj.status === "ok") {
+      currentCart = resultObj.data.articles[0];
+      showCurrentCart();
+      cantidadProductoCarrito()
+
+    }
+  });
+
+
+  document.getElementById("envio-premium").addEventListener("click", function () {
+    tipoDeEnvio(envioPremium);
+  })
+  document.getElementById("envio-express").addEventListener("click", function () {
+    tipoDeEnvio(envioExpress);
+  })
+  document.getElementById("envio-standard").addEventListener("click", function () {
+    tipoDeEnvio(envioStandard);
+  })
+  document.getElementById("tarjeta-credito").addEventListener('click', function () {
+    document.getElementById("numero-cuenta").setAttribute('disabled', '')
+    document.getElementById("numero-cuenta").value = ""
+    document.getElementById("numero-tarjeta").removeAttribute('disabled')
+    document.getElementById("codigo-seguridad").removeAttribute('disabled')
+    document.getElementById("vencimiento-tarjeta").removeAttribute('disabled')
+  })
+  document.getElementById("transferencia-bancaria").addEventListener("click", function () {
+    document.getElementById("numero-cuenta").removeAttribute('disabled')
+    document.getElementById("numero-tarjeta").setAttribute('disabled', '')
+    document.getElementById("numero-tarjeta").value = ""
+    document.getElementById("codigo-seguridad").setAttribute('disabled', '')
+    document.getElementById("codigo-seguridad").value = ""
+    document.getElementById("vencimiento-tarjeta").setAttribute('disabled', '')
+    document.getElementById("vencimiento-tarjeta").value = ""
+  })
 });
-
-//progreso hasta ahora desafiate
-
-//Esto es para el desafiate
-// function showCurrentCart() {
-//     console.log(localStorage.getItem(`cart_${user}`))
-
-//         let htmlContentToAppend = "";
-//         let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
-//         console.log(newCart)
-
-//        // let subtotal = (cantidad * newCart.cost);
-//         for (let i = 0; i < newCart.length; i++) {
-//             const cart = newCart[i];
-//             subtotal = (cart.count * cart.cost)
-
-//         htmlContentToAppend += `
-//         <div class="row m-2">
-//         <div class="col">
-//             <img src="${cart.imagen}" class="imagen-carrito">
-//           </div>
-//           <div class="col">
-//             ${cart.name}
-//           </div>
-//           <div class="col">
-//            ${cart.moneda} ${cart.cost}
-//           </div>
-//           <div class="col">
-//             <div class="form-outline col-5">
-//               <input type="number" id="typeNumber" class="form-control" value="${cart.count}" />
-//             </div>
-//           </div>
-//           <div class="col">
-
-//           <b>${cart.moneda} ${subtotal} </b>
-//           </div>
-//           </div>`;
-//         }
-
-//         document.getElementById("cart").innerHTML += htmlContentToAppend;
-//     }
-
-// let user = localStorage.getItem("email");
-
-// let cantidad = localStorage.getItem("cantidad")
-
-// function showCurrentCart() {
-//     console.log(localStorage.getItem(`cart_${user}`))
-
-//         let htmlContentToAppend = "";
-//         let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
-//         console.log(newCart)
-
-//        // let subtotal = (cantidad * newCart.cost);
-//         for (let i = 0; i < newCart.length; i++) {
-//             const cart = newCart[i];
-//             subtotal = (cart.count * cart.cost)
-
-//         htmlContentToAppend += `
-//         <div class="row m-2">
-//         <div class="col">
-//             <img src="${cart.imagen}" class="imagen-carrito">
-//           </div>
-//           <div class="col">
-//             ${cart.name}
-//           </div>
-//           <div class="col">
-//            ${cart.moneda} ${cart.cost}
-//           </div>
-//           <div class="col">
-//             <div class="form-outline col-5">
-//               <input type="number" id="typeNumber" class="form-control" value="${cart.count}" />
-//             </div>
-//           </div>
-//           <div class="col">
-
-//           <b>${cart.moneda} ${subtotal} </b>
-//           </div>
-//           </div>`;
-//         }
-
-//         document.getElementById("cart").innerHTML += htmlContentToAppend;
-//     }
-
-// document.addEventListener("DOMContentLoaded", function (e) {
-//     if (!user) {
-//         window.location = "index.html";
-//     }
-//     getJSONData(CART_INFO_URL + "25801.json").then(function (resultObj) {
-//         if (resultObj.status === "ok") {
-//             currentCart = resultObj.data.articles[0];
-//             showCurrentCart();
-//         }
-//     });
-// });

@@ -36,10 +36,152 @@
     </div>
   </nav>
   <main>
-    <div id="cart">
+    <div class="container">
+      <div id="cart">
 
-    </div>
-   
+      </div>
+      
+      <hr>
+      <form method="get" class="row mt-4 needs-validation" novalidate>
+        <div class="row">
+          <div class="col-md-8 mb-4">
+
+            <div class=" mb-4">
+              <div class="m-3">
+                <h2>Tipo de envio</h2>
+                <div id="tipo-de-envio">
+                  <div class="form-check">
+                    <input class="form-check-input envio" type="radio" name="envio" id="envio-premium" value="15" checked>
+                    <label class="form-check-label" for="envio-premium">
+                      Premium 2 a 5 dias (15%)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input envio" type="radio" name="envio" id="envio-express" value="7">
+                    <label class="form-check-label" for="envio-express">
+                      Express 5 a 8 dias (7%)
+                    </label>
+                  </div>
+                  <div class="form-check">
+                    <input class="form-check-input envio" type="radio" name="envio" id="envio-standard" value="5">
+                    <label class="form-check-label" for="envio-standard">
+                      Standard 12 a 15 dias (5%)
+                    </label>
+                  </div>
+                </div>
+                
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col">
+          <h1 class="mb-3">Direccion de envio</h1>
+          <hr class="my-4">
+          <div class="row g-3">
+            <div class="col-sm-6">
+              <label for="nombre" class="form-label">Calle</label>
+              <input type="text" class="form-control" id="calle" required>
+              <div class="invalid-feedback">
+                Ingresar calle.
+              </div>
+
+            </div>
+
+            <div class="col-sm-6">
+              <label for="apellido" class="form-label">Numero</label>
+              <input type="number" class="form-control" id="numero" required>
+              <div class="invalid-feedback">
+                Ingresar numero.
+              </div>
+            </div>
+
+            <div class="col-6">
+              <label for="email" class="form-label">Esquina</label>
+              <input type="text" class="form-control" id="esquina" required>
+              <div class="invalid-feedback">
+                Ingresar esquina.
+              </div>
+            </div>
+            <div id="envio">
+
+            </div>
+
+
+            <div class="col-sm-12 d-flex">
+              <button type="button" class="btn btn-link ps-0" required data-bs-toggle="modal" data-bs-target="#modalPagos"
+                id="pay-button">Forma de pago</button>
+              <p class="d-none text-danger" id="pay-message" style="font-size:smaller">Debe elegir una forma de pago</p>
+            </div>
+
+
+            <button class="btn btn-primary" type="submit" id="button">CHECKOUT</button>
+
+
+            <div class="modal fade" id="modalPagos" tabindex="-1" >
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h1 class="modal-title fs-5">Forma de pago</h1>
+
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault" id="tarjeta-credito" required >
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          Tarjeta de credito
+                        </label>
+                        <hr>
+                        <div class="row">
+                          <div class="col-6">
+                            <label for="nombre" class="form-label">Numero de tarjeta</label>
+                            <input type="text" class="form-control" id="numero-tarjeta" required >
+                          </div>
+
+                          <div class="col-4">
+                            <label for="apellido" class="form-label">Codigo de seg.</label>
+                            <input type="text" class="form-control" id="codigo-seguridad" required>
+                          </div>
+                        </div>
+
+                        <div class="col-6">
+                          <label for="text" class="form-label">Vencimiento(MM/AA</label>
+                          <input type="text" class="form-control" id="vencimiento-tarjeta" required>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="row">
+                      <div class="col mt-2">
+                        <input class="form-check-input" type="radio" name="flexRadioDefault"
+                          id="transferencia-bancaria" required>
+                        <label class="form-check-label" for="flexRadioDefault1">
+                          Transferencia bancaria
+                        </label>
+                        <hr>
+                        <div class="col-6">
+                          <label for="nombre" class="form-label">Numero de cuenta</label>
+                          <input type="text" class="form-control" id="numero-cuenta" required>
+                        </div>
+
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Guardar</button>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+  </form>
+
+
+
   </main>
   <footer class="text-muted">
     <div class="container">
@@ -59,10 +201,13 @@
       <div></div>
     </div>
   </div>
+
   <script src="js/bootstrap.bundle.min.js"></script>
   <script src="js/init.js"></script>
   <script src="js/cart.js"></script>
   <script src="js/showuser.js"></script>
+  <script src="js/validation.js"></script>
+
 </body>
 
 </html>
@@ -70,19 +215,3 @@
 
 
 
-<!-- <div class="col">
-            <img class="imagen-carrito" src="img/prod50924_1.jpg">
-          </div>
-          <div class="col">
-            Peugeot 309
-          </div>
-          <div class="col">
-            USD 50000
-          </div>
-          <div class="col">
-            <div class="form-outline">
-              <input type="number" id="typeNumber" class="form-control" placeholder="1" />
-               <label class="form-label" for="typeNumber">Number input</label> -->
-
-
-              

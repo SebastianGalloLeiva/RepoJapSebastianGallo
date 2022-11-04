@@ -10,24 +10,29 @@ let costoEnvio = 0
 let porcentaje = 5
 let total = 0
 let envio = 0
-let cantidad = 1
-
+//let cantidad = 1
+let newCart = JSON.parse(localStorage.getItem(`cart_${user}`)) || {};
 
 function setProdID(id) {
   localStorage.setItem("prodID", id);
-  let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
+  // let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
   newCart['producto' + id].count = cantidad
   localStorage.setItem(`cart_${user}`, JSON.stringify(newCart))
   showCurrentCart()
 
   window.location = "cart.html"
 }
-
+function eliminarArticulo(id){
+  delete newCart['producto' + id]
+  localStorage.setItem(`cart_${user}`, JSON.stringify(newCart))
+  showCurrentCart()
+  
+}
 
 function showCurrentCart() {
 
   let htmlContentToAppend = "";
-  let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
+  //let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
   htmlContentToAppend += `
         <div class="container col-md-7 m-auto mt-5">
        <h1 class="text-center">Carrito de compras</h1>
@@ -46,6 +51,8 @@ function showCurrentCart() {
            </div>
            <div class="col">
              <p> <b>Subtotal</b></p>
+           </div>
+           <div class="col">
            </div>
          </div>
          <hr class="border-2">
@@ -77,13 +84,22 @@ function showCurrentCart() {
            ${cart.moneda} ${cart.cost}
           </div>
           <div class="col">
-            <div class="form-outline col-5" onclick="setProdID(${cart.productId})">
+            <div class="form-outline col-5 w-75" onclick="setProdID(${cart.productId})">
               <input type="number" id="typeNumber" class="form-control type-number" value="${cart.count}" />
             </div>
           </div>
           <div class="col">
 
-          <b>${cart.moneda} ${subtotal} </b>
+          <b>${cart.moneda} ${subtotal}</b>
+        
+          </div>
+          <div class="col">
+          <button type="button" class="btn btn-outline-danger" onclick="eliminarArticulo(${cart.productId})"> 
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
+  <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
+  <path fill-rule="evenodd" d="M14.5 3a1 1 0 0 1-1 1H13v9a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V4h-.5a1 1 0 0 1-1-1V2a1 1 0 0 1 1-1H6a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1h3.5a1 1 0 0 1 1 1v1zM4.118 4 4 4.059V13a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1V4.059L11.882 4H4.118zM2.5 3V2h11v1h-11z"></path>
+</svg>
+              </button>
           </div>
           </div>
           <hr>
@@ -253,4 +269,5 @@ document.addEventListener("DOMContentLoaded", function (e) {
     document.getElementById("vencimiento-tarjeta").setAttribute('disabled', '')
     document.getElementById("vencimiento-tarjeta").value = ""
   })
+  
 });

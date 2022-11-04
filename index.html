@@ -15,21 +15,31 @@
 
 <body>
   
-    <main class="form-signin m-auto">
+    <main class="form-signin m-auto ">
+      <form class="needs-validation" novalidate>
   
       <img class="mb-4" src="img/login.png" alt="" width="300" >
       <h1 class="h3 mb-3 text-center fw-normal">Inicio de Sesion</h1>
     
       <div class="form-floating">
-        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+        <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com" required>
+        
         <label for="floatingInput">Email</label>
+        <div class="invalid-feedback">
+          Ingresar email.
+        </div>
       </div>
-      <div class="form-floating">
-        <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+      <div class="form-floating" >
+        <input type="password" class="form-control" id="floatingPassword" placeholder="Password" required>
+        
         <label for="floatingPassword">Contraseña</label>
+        <div class="invalid-feedback">
+          Ingresar Contraseña.
+        </div>
       </div>
     
-      <button class="w-100 btn btn-lg btn-primary" id="boton-ingreso" type="submit">Ingresar</button>
+      <button class="w-100 btn btn-lg btn-primary mt-2" id="boton-ingreso" type="submit">Ingresar</button>
+    </form>
     
     </main>
   <footer class="text-muted">
@@ -43,7 +53,26 @@
 <script src="js/login.js"></script>
 <script src="js/init.js"></script>
 <script src="js/showuser.js"></script>
+<script type="module">
+  // Import the functions you need from the SDKs you need
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+  // TODO: Add SDKs for Firebase products that you want to use
+  // https://firebase.google.com/docs/web/setup#available-libraries
 
+  // Your web app's Firebase configuration
+  const firebaseConfig = {
+    apiKey: "AIzaSyDQnF8_PvMcMFBJSqhHBjnZ6EGaaX-G9vE",
+    authDomain: "loginauthjap.firebaseapp.com",
+    projectId: "loginauthjap",
+    storageBucket: "loginauthjap.appspot.com",
+    messagingSenderId: "892651063501",
+    appId: "1:892651063501:web:b2f5e6ae4883d2d6d6c184"
+  };
+  
+
+  // Initialize Firebase
+  const app = initializeApp(firebaseConfig);
+</script>
   
 </body>
 

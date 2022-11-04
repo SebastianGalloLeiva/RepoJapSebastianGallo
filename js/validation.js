@@ -48,10 +48,10 @@ document.getElementById("button").addEventListener("click", function () {
         }, false)
       })})
 
-tarjetadecredito.addEventListener("change", function(){
-    checkPayment();
-})
+// tarjetadecredito.addEventListener("change", function(){
+//     checkPayment();
+// })
 
-transferenciaBancaria.addEventListener("change", function(){
-    checkPayment()
-})
+// transferenciaBancaria.addEventListener("change", function(){
+//     checkPayment()
+// })

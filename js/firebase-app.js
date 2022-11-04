@@ -1,4 +1,4 @@
-import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebase-app.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-app.js";
   // TODO: Add SDKs for Firebase products that you want to use
   // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -15,11 +15,9 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.13.0/firebas
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-import { GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
-
-const provider = new GoogleAuthProvider();
 import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
 
+const provider = new GoogleAuthProvider();
 const auth = getAuth();
 signInWithPopup(auth, provider)
   .then((result) => {

@@ -37,9 +37,17 @@ signInWithPopup(auth, provider)
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
   });
+  onAuthStateChanged(auth, (user) => {
+    if (user) {
+      window.location = "portada.html"
+      // ...
+    } else {
+      window.location  = "index.html"
+    }
+  });
 
   
 
-  document.getElementById("boton-google").addEventListener("DOMContentLoaded", function (){
+  document.getElementById("boton-google").addEventListener("click", function (){
       signInWithPopup()
   })

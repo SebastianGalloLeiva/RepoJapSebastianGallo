@@ -15,7 +15,7 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebas
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
@@ -26,6 +26,8 @@ signInWithPopup(auth, provider)
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
+    console.log(user);
+    debugger
     // ...
   }).catch((error) => {
     // Handle Errors here.

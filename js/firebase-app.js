@@ -19,15 +19,13 @@ import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from
 
 const provider = new GoogleAuthProvider();
 const auth = getAuth();
-signInWithPopup(auth, provider)
-  .then((result) => {
+function signIn (){
+signInWithPopup(auth, provider).then((result) => {
     // This gives you a Google Access Token. You can use it to access the Google API.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
     // The signed-in user info.
     const user = result.user;
-    console.log(user);
-    debugger
     // ...
   }).catch((error) => {
     // Handle Errors here.
@@ -38,7 +36,7 @@ signInWithPopup(auth, provider)
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
-  });
+  })};
   onAuthStateChanged(auth, (user) => {
     if (user) {
       window.location = "portada.html"
@@ -51,5 +49,5 @@ signInWithPopup(auth, provider)
   
 
   document.getElementById("boton-google").addEventListener("click", function (){
-      signInWithPopup()
+      signIn()
   })

@@ -15,18 +15,36 @@ import { initializeApp } from "https://www.gstatic.com/firebasejs/9.11.0/firebas
 
   // Initialize Firebase
   const app = initializeApp(firebaseConfig);
-import { getAuth, signInWithPopup, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
+import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onAuthStateChanged } from "https://www.gstatic.com/firebasejs/9.11.0/firebase-auth.js";
 
-const provider = new GoogleAuthProvider();
-const auth = getAuth();
-function signIn (){
-signInWithPopup(auth, provider).then((result) => {
-    // This gives you a Google Access Token. You can use it to access the Google API.
+const provider = new GoogleAuthProvider(app);
+const auth = getAuth(app);
+//   onAuthStateChanged(auth, (user) => {
+//     if (user) {
+//       window.location = "portada.html"
+//       // ...
+//     } else {
+//       window.location  = "index.html"
+//     }
+//   });
+
+  
+
+  document.getElementById("boton-google").addEventListener("click", function (){
+    signInWithRedirect(auth, provider);
+
+    getRedirectResult(auth)
+  .then((result) => {
+    // This gives you a Google Access Token. You can use it to access Google APIs.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
+    console.log(token);
+
     // The signed-in user info.
     const user = result.user;
-    // ...
+    localStorage.setItem("email", JSON.stringify( user))
+    console.log(user);
+    window.location = "portada.html"
   }).catch((error) => {
     // Handle Errors here.
     const errorCode = error.code;
@@ -36,18 +54,7 @@ signInWithPopup(auth, provider).then((result) => {
     // The AuthCredential type that was used.
     const credential = GoogleAuthProvider.credentialFromError(error);
     // ...
-  })};
-  onAuthStateChanged(auth, (user) => {
-    if (user) {
-      window.location = "portada.html"
-      // ...
-    } else {
-      window.location  = "index.html"
-    }
   });
 
-  
-
-  document.getElementById("boton-google").addEventListener("click", function (){
-      signIn()
+      
   })

@@ -19,22 +19,12 @@ import { getAuth, signInWithRedirect, getRedirectResult, GoogleAuthProvider, onA
 
 const provider = new GoogleAuthProvider(app);
 const auth = getAuth(app);
-//   onAuthStateChanged(auth, (user) => {
-//     if (user) {
-//       window.location = "portada.html"
-//       // ...
-//     } else {
-//       window.location  = "index.html"
-//     }
-//   });
-
   
 
   document.getElementById("boton-google").addEventListener("click", function (){
     signInWithRedirect(auth, provider);
 
-    getRedirectResult(auth)
-  .then((result) => {
+    getRedirectResult(auth).then((result) => {
     // This gives you a Google Access Token. You can use it to access Google APIs.
     const credential = GoogleAuthProvider.credentialFromResult(result);
     const token = credential.accessToken;
@@ -42,8 +32,7 @@ const auth = getAuth(app);
 
     // The signed-in user info.
     const user = result.user;
-    localStorage.setItem("email", JSON.stringify( user))
-    console.log(user);
+    localStorage.setItem("email", JSON.stringify(user.email))
     window.location = "portada.html"
   }).catch((error) => {
     // Handle Errors here.

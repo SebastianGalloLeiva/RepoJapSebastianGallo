@@ -7,30 +7,6 @@ function showProfile(){
 }
 
 
-// document.getElementById("guardar-cambio").addEventListener("click", function () {
-//     'use strict'
-//     // // Fetch all the forms we want to apply custom Bootstrap validation styles to
-//     // var forms = document.querySelectorAll('.needs-validation')
-  
-//     // // Loop over them and prevent submission
-//     // Array.prototype.slice.call(forms)
-//     //   .forEach(function (form) {
-//     //     form.addEventListener('submit', function (event) {
-//     //         console.log(form);
-//     //       if (!form.checkValidity()) {
-//     //         event.preventDefault()
-//     //         event.stopPropagation()
-
-//     //       } else {
-//               setProfile()
-
-// //           }
-            
-// //           form.classList.add('was-validated')
-// //         }, false)
-// //       })})
-
-
 document.getElementById("guardar-cambio").addEventListener("click", function () {
     setProfile()
 })
@@ -40,6 +16,7 @@ document.addEventListener("DOMContentLoaded", function(){
     if (!user) {
         window.location = "index.html"
     } 
+    //carga los valores del perfil si el usuario existe
     if (profile){
         
         document.getElementById("primer-nombre").value = profile.primerNombre
@@ -53,6 +30,8 @@ document.addEventListener("DOMContentLoaded", function(){
     
 })
 
+//funcion llamada una vez que el boton de guardar es apretado.
+//toma los value de los input field para generar el perfil del usuario y lo guarda en el local con el perfil+username
 
 function setProfile (){
     profile = {
@@ -68,6 +47,7 @@ function setProfile (){
 }
 
 
+//para el desafio, una escucha de evento para cuando cambia el fileinput.
 document.querySelector("#myFileInput").addEventListener("change", function(){
     const reader = new FileReader();
 
@@ -78,6 +58,8 @@ document.querySelector("#myFileInput").addEventListener("change", function(){
     reader.readAsDataURL(this.files[0])
 
 })
+
+//Si hay una imagen de perfil para el usuario que esta logeado, carga la imagen en el lugar donde va la foto de perfil
 
 document.addEventListener("DOMContentLoaded", () => {
     const recentImageDataUrl = localStorage.getItem(`${user}_Picture`);

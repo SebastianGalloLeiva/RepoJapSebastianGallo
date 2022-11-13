@@ -59,63 +59,65 @@
       <div class="col">
         <h1 class="text-center m-4 display-1">Perfil </h4>
       </div>
-      <div class="col mt-3">
-        <img src="img/foto-perfil-generica.jpeg" class="img-thumbnail w-25 rounded float-end" alt="Preview" id="imgPreview">
+      <div class="col-1"></div>
+      <div class="d-none d-md-block col-3 mt-3">
+        <img src="img/foto-perfil-generica.jpeg" class="rounded float-end imagen-css" alt="Preview" id="imgPreview">
       </div>
-      <div class="col-3"></div>
+      <div class="col-2"></div>
 
       </div>
                     <div class="col1"></div>
 
         <hr class="mt-1">
         <div>
-        <form method="get" class="row mt-4 needs-validation" novalidate>
+        <form method="./" class="row mt-4 needs-validation">
           <div class="row">
-            <div class="col-2"></div>
-            <div class="mb-3 col-4">
+            <div class="col-lg-2"></div>
+            <div class="mb-3 col-lg-4">
             <label for="email" class="form-label">Primer nombre</label>
-            <input type="text" class="form-control" id="primer-nombre"  required>
-            <div class="invalid-feedback">
-              Ingresar Nombre.
-            </div>
+            <input type="text" class="form-control input-field" id="primer-nombre"  required
+            oninvalid="this.setCustomValidity('Ingresar Nombre por favor')"
+            oninput="this.setCustomValidity('')">
+            
           </div>
-          <div class="mb-3 col-4">
+          <div class="mb-3 col-lg-4">
             <label for="exampleInputPassword1" class="form-label">Segundo nombre</label>
-            <input type="text" class="form-control" id="segundo-nombre" novalidate>
+            <input type="text" class="form-control" id="segundo-nombre">
           </div>
         </div>
           <div class="row">
-            <div class="col-2"></div>
-          <div class="mb-3 col-4">
+            <div class="col-lg-2"></div>
+          <div class="mb-3 col-lg-4">
             <label for="exampleInputEmail1" class="form-label">Primer apellido</label>
-            <input type="text" class="form-control" id="primer-apellido" required>
-            <div class="invalid-feedback">
-              Ingresar apellido.
-            </div>
+            <input type="text" class="form-control input-field" id="primer-apellido" required   
+            oninvalid="this.setCustomValidity('Ingresar Apellido por favor')"
+            oninput="this.setCustomValidity('')"/>
+            
+           
           </div>
-          <div class="mb-3 col-4">
+          <div class="mb-3 col-lg-4">
             <label for="exampleInputPassword1" class="form-label">Segundo apellido</label>
             <input type="text" class="form-control" id="segundo-apellido">
           </div>
         </div>
         <div class="row">
-          <div class="col-2"></div>
-        <div class="mb-3 col-4">
+          <div class="col-lg-2"></div>
+        <div class="mb-3 col-lg-4">
           <label for="exampleInputEmail1" class="form-label">Email</label>
-          <input type="email" class="form-control" id="user-email" aria-describedby="emailHelp" required>
-          <div class="invalid-feedback">
-            Ingresar email.
-          </div>
+          <input type="email" class="form-control input-field" id="user-email" aria-describedby="emailHelp" required
+          oninvalid="this.setCustomValidity('Ingresar email por favor')"
+            oninput="this.setCustomValidity('')">
+          
         </div>
-        <div class="mb-3 col-4">
+        <div class="mb-3 col-lg-4">
           <label for="exampleInputPassword1" class="form-label">Imagen de perfil</label>
 
           <input type="file" id="myFileInput">
         </div>
       </div>
       <div class="row">
-        <div class="col-2"></div>
-        <div class="mb-3 col-4">
+        <div class="col-lg-2"></div>
+        <div class="mb-3 col-lg-4">
           <label for="exampleInputPassword1" class="form-label">Telefono de contacto</label>
           <input type="text" class="form-control" id="telefono-de-contacto">
         </div>
@@ -123,7 +125,7 @@
       <hr>
         <div class="row">
         <div class="d-flex justify-content-center">
-          <button type="submit" class="btn btn-primary  col-2" id="guardar-cambio">Guardar cambios</button>
+          <button type="submit" class="btn btn-primary  col-lg-2" id="guardar-cambio">Guardar cambios</button>
       </div>
     </div>
   </form>

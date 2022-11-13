@@ -10,7 +10,6 @@ let costoEnvio = 0
 let porcentaje = 5
 let total = 0
 let envio = 0
-//let cantidad = 1
 let newCart = JSON.parse(localStorage.getItem(`cart_${user}`)) || {};
 
 function setProdID(id) {
@@ -30,29 +29,31 @@ function eliminarArticulo(id){
 }
 
 function showCurrentCart() {
+  
 
+  if (Object.keys(newCart).length){
   let htmlContentToAppend = "";
   //let newCart = JSON.parse(localStorage.getItem(`cart_${user}`))
   htmlContentToAppend += `
-        <div class="container col-md-7 m-auto mt-5">
+        <div class="container col-md-8 m-auto mt-5">
        <h1 class="text-center">Carrito de compras</h1>
        <h4 class="mb-5 "> <b>Articulos a comprar:</b></h2>
          <div class="row align-items-start">
-           <div class="col">
+           <div class="d-none d-sm-block col-2">
            </div>
-           <div class="col">
+           <div class="col-2 d-none d-sm-block ">
              <p> <b>Nombre</b></p>
            </div>
-           <div class="col">
+           <div class="col-2 d-none d-sm-block">
              <p> <b>Costo</b></p>
            </div>
-           <div class="col">
+           <div class="col-2 d-none d-sm-block">
              <p> <b>Cantidad</b></p>
            </div>
-           <div class="col">
+           <div class="col-2 d-none d-sm-block">
              <p> <b>Subtotal</b></p>
            </div>
-           <div class="col">
+           <div class="col-2 d-none d-sm-block">
            </div>
          </div>
          <hr class="border-2">
@@ -74,26 +75,26 @@ function showCurrentCart() {
     if (cart.name != undefined && cart.count>0) {
       htmlContentToAppend += `
          <div class="row mb-3 align-items-start">
-        <div class="col">
+        <div class="d-none d-sm-block col">
             <img src="${cart.imagen}" class="imagen-carrito">
           </div>
-          <div class="col">
+          <div class="col-2">
             ${cart.name}
           </div>
-          <div class="col">
+          <div class="col-2">
            ${cart.moneda} ${cart.cost}
           </div>
-          <div class="col">
+          <div class="col-2">
             <div class="form-outline col-5 w-75" onclick="setProdID(${cart.productId})">
               <input type="number" id="typeNumber" class="form-control type-number" value="${cart.count}" />
             </div>
           </div>
-          <div class="col">
+          <div class="col-2">
 
           <b>${cart.moneda} ${subtotal}</b>
         
           </div>
-          <div class="col">
+          <div class="col-1">
           <button type="button" class="btn btn-outline-danger" onclick="eliminarArticulo(${cart.productId})"> 
                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-trash" viewBox="0 0 16 16">
   <path d="M5.5 5.5A.5.5 0 0 1 6 6v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm2.5 0a.5.5 0 0 1 .5.5v6a.5.5 0 0 1-1 0V6a.5.5 0 0 1 .5-.5zm3 .5a.5.5 0 0 0-1 0v6a.5.5 0 0 0 1 0V6z"></path>
@@ -154,6 +155,22 @@ function showCurrentCart() {
 
 
   document.getElementById("envio").innerHTML = htmlContentToAppend;
+}
+  else {
+    document.getElementById("cart").innerHTML = ""
+    document.getElementById("alertResult").classList.add('alert-primary');
+    let msgToShowHTML = document.getElementById("resultSpan")
+  msgToShowHTML.innerHTML = `<div class="carrito-vacio text-center">
+  <h1>¡Hay un carrito que llenar!</h1>
+  <h4>Actualmente no tenés productos en tu carrito.</h4>
+  <p>Buscá entre millones de productos</p>
+  <a class="btn btn-primary col-auto justify-content-md-end" href="categories.html" role="button">Buscar productos</a>
+  </div>
+`
+  document.getElementById("alertResult").classList.add("show");
+
+  }
+  
 }
 
 function cantidadProductoCarrito() {

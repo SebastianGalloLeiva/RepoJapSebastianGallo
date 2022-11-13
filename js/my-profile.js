@@ -7,27 +7,34 @@ function showProfile(){
 }
 
 
-document.getElementById("guardar-cambio").addEventListener("click", function () {
-    'use strict'
-    // Fetch all the forms we want to apply custom Bootstrap validation styles to
-    var forms = document.querySelectorAll('.needs-validation')
+// document.getElementById("guardar-cambio").addEventListener("click", function () {
+//     'use strict'
+//     // // Fetch all the forms we want to apply custom Bootstrap validation styles to
+//     // var forms = document.querySelectorAll('.needs-validation')
   
-    // Loop over them and prevent submission
-    Array.prototype.slice.call(forms)
-      .forEach(function (form) {
-        form.addEventListener('submit', function (event) {
-          if (!form.checkValidity()) {
-            event.preventDefault()
-            event.stopPropagation()
+//     // // Loop over them and prevent submission
+//     // Array.prototype.slice.call(forms)
+//     //   .forEach(function (form) {
+//     //     form.addEventListener('submit', function (event) {
+//     //         console.log(form);
+//     //       if (!form.checkValidity()) {
+//     //         event.preventDefault()
+//     //         event.stopPropagation()
 
-          } else {
-              setProfile()
+//     //       } else {
+//               setProfile()
 
-          }
+// //           }
             
-          form.classList.add('was-validated')
-        }, false)
-      })})
+// //           form.classList.add('was-validated')
+// //         }, false)
+// //       })})
+
+
+document.getElementById("guardar-cambio").addEventListener("click", function () {
+    setProfile()
+})
+
 
 document.addEventListener("DOMContentLoaded", function(){
     if (!user) {

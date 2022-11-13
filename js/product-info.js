@@ -81,16 +81,18 @@ function showProduct() {
   }
 
   htmlContentToAppend += `
-        <div class="row">
-        <div class="col">
+        
+        <div class="col text-center">
 
          <h1> ${product.name} </h1> 
          </div>
-         <div align="right" class="col">
+         <div align="right" class="col text-center ">
 
          <button type="button" class="btn btn-success" onclick="setCart()">Comprar</button>
+         
          </div>
-         </div>
+         
+         
 
          <hr>
          <h2> Precio </h2>
@@ -139,12 +141,12 @@ function showComments() {
     }
 
     htmlContentToAppend += `
-        <div class="list-group-item list-group-item-action cursor-active">
+        <div class="col-3 list-group-item list-group-item-action cursor-active">
                 <div class="row">
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1"><strong>${comment.user}</strong></h4>
-                            <p class="mb-1"> ${comment.dateTime} </p>
+                            <p class="d-none d-lg-block  mb-1"> ${comment.dateTime} </p>
                            <div class="col-3" ${rating} </div>
                         </div>
                         <p class="mb-1">${comment.description}</p>
@@ -178,8 +180,8 @@ function showNewComments() {
                     <div class="col">
                         <div class="d-flex w-100 justify-content-between">
                             <h4 class="mb-1"><strong>${newcomment.User}</strong></h4>
-                            <p class="mb-1"> ${newcomment.fecha} </p>
-                           <div class="col-3" ${newrating} </div>
+                            <p class="d-none d-lg-block mb-1"> ${newcomment.fecha} </p>
+                           <div class="overflow: auto col-3" ${newrating} </div>
                         </div>
                         <p class="mb-1">${newcomment.commentario}</p>
                     </div>
